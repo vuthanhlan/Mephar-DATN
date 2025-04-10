@@ -59,21 +59,35 @@ public class AddNewMerchandiseAction {
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
     }
-    public void inputAllData(String code, String Barcode, String Name, String SummaryName, int ImportPrice, int sellingPrice, float weight, String Packing, int inventor, String Unit) throws InterruptedException {
+
+
+    public void inputData(String code, String Barcode, String Name, String SummaryName,String group,String location, String ImportPrice, String sellingPrice, String weight, String Packing,String brand,String country, String inventor, String Unit) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         addNewProductPageUI.getTextCode().sendKeys(code);
-        Thread.sleep(1000);
         addNewProductPageUI.getTextBarcode().sendKeys(Barcode);
-        Thread.sleep(1000);
         addNewProductPageUI.getTextMerchandiseName().sendKeys(Name);
         addNewProductPageUI.getTextSummaryName().sendKeys(SummaryName);
         addNewProductPageUI.getTextGroup().click();
-        addNewProductPageUI.getSubGroup().click();
+        WebElement SubGroup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+group+"')]")));
+        SubGroup.click();
+        addNewProductPageUI.getTextLocation().click();
+        WebElement SubLocation = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+location+"')]")));
+        SubLocation.click();
+
         addNewProductPageUI.getTextImportPrice().sendKeys(String.valueOf(ImportPrice));
         addNewProductPageUI.getTextSellingPrice().sendKeys(String.valueOf(sellingPrice));
         addNewProductPageUI.getTextWeight().sendKeys(String.valueOf(weight));
         addNewProductPageUI.getTextPacking().sendKeys(Packing);
+        addNewProductPageUI.getTextBrand().click();
+        WebElement SubBrand = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@title,'"+brand+"')]")));
+        SubBrand.click();
+
+        addNewProductPageUI.getTextManufacturingCountry().click();
+        WebElement SubCountry = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+country+"')]")));
+        SubCountry.click();
         addNewProductPageUI.getTextInventor().sendKeys(String.valueOf(inventor));
         addNewProductPageUI.getTextBasicUnit().sendKeys(Unit);
+
     }
     public void clickButtonLuu(){
         addNewProductPageUI.getButtonLuu().click();
