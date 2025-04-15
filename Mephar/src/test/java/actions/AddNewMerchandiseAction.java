@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ui.AddNewProductPageUI;
+import ui.NavigatePageUI;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
@@ -17,19 +18,21 @@ import java.time.Duration;
 public class AddNewMerchandiseAction {
     WebDriver driver;
     AddNewProductPageUI addNewProductPageUI;
+    NavigatePageUI navigatePageUI;
 
     public AddNewMerchandiseAction(WebDriver driver) {
         this.driver = driver;
         addNewProductPageUI = new AddNewProductPageUI(driver);
+        navigatePageUI = new NavigatePageUI(driver);
     }
     public void navigateToAddNewMerchandisePage() throws InterruptedException {
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        addNewProductPageUI.getLinkProduct().click();
-        addNewProductPageUI.getLinkListProduct().click();
-        addNewProductPageUI.getButtonAddProduct().click();
+        navigatePageUI.getLinkProduct().click();
+        navigatePageUI.getLinkListProduct().click();
+        navigatePageUI.getButtonAddProduct().click();
 //        wait.until(ExpectedConditions.elementToBeClickable(addNewProductPageUI.getButtonAddProduct())).click();
         Thread.sleep(1000);
-        addNewProductPageUI.getLinkAddNewMerchandise().click();
+        navigatePageUI.getLinkAddNewMerchandise().click();
     }
     public void inputRequireData(String MerchandiseName, int sellingPrice, int inventor, String Unit) {
         addNewProductPageUI.getTextMerchandiseName().sendKeys(MerchandiseName);

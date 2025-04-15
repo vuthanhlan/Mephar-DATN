@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -33,7 +34,11 @@ public class AddNewMerchandiseTest {
 
     @BeforeMethod
     public void setUp() {
-        driver = new ChromeDriver();
+
+        // Khởi tạo ChromeOptions và bật chế độ ẩn danh
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         login = new LoginAction(driver);
         addNewMerchandise = new AddNewMerchandiseAction(driver);
@@ -44,7 +49,9 @@ public class AddNewMerchandiseTest {
     public void testAddNewProductSuccessfulWithRequiredFields() throws InterruptedException, AWTException {
         List<Map<String, String>> excelData = ExcelUntils.readExcelData(excelFilePath, "Danh sách sản phẩm");
         for(int i=0; i<1; i++){
+
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
             driver.get("https://mephar-sit.acdtech.asia/auth/sign-in/");
             //B1: Login
             login.Login();
@@ -66,6 +73,7 @@ public class AddNewMerchandiseTest {
             WebElement ActualName = addNewProductPageUI.getActualProductName();
             WebElement ActualInventor = addNewProductPageUI.getActualInventor();
             WebElement ActualSellingPrice = addNewProductPageUI.getActualSellingPrice();
+            Thread.sleep(1000);
             Assert.assertEquals(ActualName.getText(),rowData.get("Tên sản phẩm"));
             Assert.assertEquals(ActualInventor.getText().replace(",","").trim(), rowData.get("Tồn kho"));
             Assert.assertEquals(ActualSellingPrice.getText().replace("đ","").replace(",","").trim(), rowData.get("Giá bán"));
@@ -89,7 +97,7 @@ public class AddNewMerchandiseTest {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             WebElement toast = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(addNewProductPageUI.getMessageSuccessful())));
             String message = toast.getText();
-            Assert.assertTrue(message.contains("Thêm mới thành công!"));
+            Assert.assertEquals(message,"Thêm mới thành công!");
         }
 
 

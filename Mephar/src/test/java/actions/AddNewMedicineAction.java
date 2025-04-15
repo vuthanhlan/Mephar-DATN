@@ -6,25 +6,28 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ui.AddNewProductPageUI;
+import ui.NavigatePageUI;
 
 import java.time.Duration;
 
 public class AddNewMedicineAction {
     WebDriver driver;
     AddNewProductPageUI addNewProductPageUI;
+    NavigatePageUI navigatePageUI;
 
     public AddNewMedicineAction(WebDriver driver) {
         this.driver = driver;
         this.addNewProductPageUI = new AddNewProductPageUI(driver);
+        this.navigatePageUI = new NavigatePageUI(driver);
     }
     public void navigateToAddNewMedicinePage() throws InterruptedException {
 
-        addNewProductPageUI.getLinkProduct().click();
-        addNewProductPageUI.getLinkListProduct().click();
-        addNewProductPageUI.getButtonAddProduct().click();
+        navigatePageUI.getLinkProduct().click();
+        navigatePageUI.getLinkListProduct().click();
+        navigatePageUI.getButtonAddProduct().click();
 //        wait.until(ExpectedConditions.elementToBeClickable(addNewProductPageUI.getButtonAddProduct())).click();
         Thread.sleep(1000);
-        addNewProductPageUI.getLinkAddNewMedicine().click();
+        navigatePageUI.getLinkAddNewMedicine().click();
 
     }
     public void inputData(String code, String Barcode, String Name, String SummaryName,String group,String RouteOfUse,String location, String ImportPrice, String sellingPrice, String weight, String Unit) throws InterruptedException {

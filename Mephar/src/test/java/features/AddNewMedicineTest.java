@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -32,7 +33,10 @@ public class AddNewMedicineTest {
 
     @BeforeMethod
     public void setUp() {
-        driver = new ChromeDriver();
+        // Khởi tạo ChromeOptions và bật chế độ ẩn danh
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         login = new LoginAction(driver);
         addNewMedicine = new AddNewMedicineAction(driver);

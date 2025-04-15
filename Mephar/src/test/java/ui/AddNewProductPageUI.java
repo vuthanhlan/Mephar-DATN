@@ -7,11 +7,6 @@ import org.openqa.selenium.WebElement;
 public class AddNewProductPageUI {
     WebDriver driver;
     public AddNewProductPageUI(WebDriver driver) {this.driver = driver;}
-    public WebElement getLinkProduct(){return driver.findElement(By.xpath("//span[contains(text(),'Sản phẩm')]"));}
-    public WebElement getLinkListProduct(){return driver.findElement(By.xpath("//span[contains(text(),'Danh sách sản phẩm')]")); }
-    public WebElement getButtonAddProduct(){return driver.findElement(By.xpath("//span[contains(text(),'Thêm mới')]/ancestor::button"));}
-    public WebElement getLinkAddNewMedicine(){return driver.findElement(By.xpath("//span[contains(text(),'Thêm mới thuốc')]/parent::li"));}
-    public WebElement getLinkAddNewMerchandise(){return driver.findElement(By.xpath("//span[contains(text(),'Thêm mới hàng hóa')]/parent::li"));}
 
 
     //Medicine
@@ -56,7 +51,7 @@ public class AddNewProductPageUI {
     public WebElement getActualProductName(){return driver.findElement(By.xpath("//table//tr[2]/td[4]"));}
     public WebElement getActualInventor(){return driver.findElement(By.xpath("//table//tr[2]/td[7]"));}
     public WebElement getActualSellingPrice(){return driver.findElement(By.xpath("//table//tr[2]/td[9]"));}
-    public static String getMessageSuccessful(){return "//div[contains(@class,'ant-message-notice-content')]";}
+    public static String getMessageSuccessful(){return "//span[contains(text(),'Thêm mới thành công!')]";}
     public static String getMessageRequire(){return "//p[contains(text(),'Đây là trường bắt buộc!')]";}
 
     public static String getDuplicateBarcodeToastXpath(String barcode) {
