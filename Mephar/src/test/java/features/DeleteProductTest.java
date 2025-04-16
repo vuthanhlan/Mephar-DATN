@@ -2,7 +2,6 @@ package features;
 
 import actions.DeleteProductAction;
 import actions.LoginAction;
-import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,8 +14,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ui.DeleteProductUI;
-import ui.NavigatePageUI;
-import untils.ExcelUntils;
+import utils.ExcelUntils;
 
 import java.time.Duration;
 import java.util.List;
@@ -27,7 +25,7 @@ public class DeleteProductTest {
     DeleteProductUI deleteProductUI;
     DeleteProductAction deleteProductAction;
     LoginAction login;
-    String excelFilePath="productData.xlsx";
+    String excelFilePath="data/productData.xlsx";
     @BeforeMethod
     public void setUp() throws Exception {
         // Khởi tạo ChromeOptions và bật chế độ ẩn danh
@@ -101,22 +99,22 @@ public class DeleteProductTest {
             driver.get("https://mephar-sit.acdtech.asia/auth/sign-in/");
             //B1: Login
             login.Login();
-            Thread.sleep(2000);
+            Thread.sleep(4000);
             //B2: Navigate to List Product Page
             deleteProductAction.navigateToListProduct();
             deleteProductAction.searchProduct(rowData.get("Mã hàng"));
             deleteProductAction.viewProductDetails(rowData.get("Mã hàng"));
             deleteProductAction.deleteProduct(rowData.get("Mã hàng"));
             deleteProductAction.clickCancelButton();
-            Assert.assertTrue(deleteProductAction.isProductExist(rowData.get("Mã hàng")), "Sản phẩm vẫn còn sau khi hủy xóa");
             Assert.assertTrue(deleteProductAction.isPopupClosed(), "Popup phải được đóng sau khi hủy");
+            Assert.assertTrue(deleteProductAction.isProductExist(rowData.get("Mã hàng")), "Sản phẩm vẫn còn sau khi hủy xóa");
         }
     }
 
-//    @AfterMethod
-//    public void tearDown() throws Exception {
-//        if (driver != null) {
-//            driver.quit();
-//        }
-//    }
+    @AfterMethod
+    public void tearDown() throws Exception {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 }

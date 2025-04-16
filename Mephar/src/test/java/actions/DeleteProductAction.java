@@ -1,6 +1,7 @@
 package actions;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -59,9 +60,15 @@ public class DeleteProductAction {
 
     public boolean isPopupClosed() {
         String xpath = deleteProductUI.getPopupDelete();
-        List<WebElement> popup = driver.findElements(By.xpath(xpath)); // Hoặc bằng class hoặc locator của popup
-        return popup.size() == 0; // Nếu popup không còn trong DOM thì sẽ trả về true
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            // Đợi cho popup không còn trong DOM
+            return wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpath)));
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
+
     public boolean isProductExist(String product) {
         String xpath = deleteProductUI.getProduct(product); // nhận chuỗi XPath
         List<WebElement> products = driver.findElements(By.xpath(xpath)); // tạo locator từ String
