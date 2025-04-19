@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ui.AddNewProductPageUI;
@@ -58,7 +59,7 @@ public class AddNewMerchandiseTest {
             addNewMerchandise.navigateToAddNewMerchandisePage();
             //B3: Input required fields
             Map<String, String> rowData = excelData.get(i);
-            addNewMerchandise.inputData(rowData.get("Mã hàng"),rowData.get("Mã vạch"),rowData.get("Tên sản phẩm"),rowData.get("Tên viết tắt"),rowData.get("Nhóm sản phẩm"), rowData.get("Vị trí"), rowData.get("Giá vốn"), rowData.get("Giá bán"),rowData.get("Trọng lượng"),rowData.get("Quy cách đóng gói"),rowData.get("Hãng sản xuất"),rowData.get("Nước sản xuẩt"),rowData.get("Tồn kho"),rowData.get("Đơn vị cơ bản"));
+            addNewMerchandise.inputRequireData(rowData.get("Tên sản phẩm"), Integer.parseInt(rowData.get("Giá bán")),Integer.parseInt(rowData.get("Tồn kho")),rowData.get("Đơn vị cơ bản"));
 //            addNewProduct.loadImage();
             Thread.sleep(5000);
             //B4: Click button Luu
@@ -164,10 +165,10 @@ public class AddNewMerchandiseTest {
         }
     }
 
-//    @AfterMethod
-//    public void tearDown() {
-//        if (driver != null) {
-//            driver.quit();
-//        }
-//    }
+    @AfterMethod
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 }

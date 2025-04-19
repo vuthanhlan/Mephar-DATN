@@ -52,7 +52,7 @@ public class AddNewMedicineTest {
             login.Login();
             addNewMedicine.navigateToAddNewMedicinePage();
             Map<String, String> rowData = excelData.get(i);
-            addNewMedicine.inputData(rowData.get("Mã hàng"),rowData.get("Mã vạch"),rowData.get("Tên sản phẩm"),rowData.get("Tên viết tắt"),rowData.get("Nhóm sản phẩm"),rowData.get("Đường dùng"), rowData.get("Vị trí"), rowData.get("Giá vốn"), rowData.get("Giá bán"),rowData.get("Trọng lượng"),rowData.get("Đơn vị cơ bản"));
+            addNewMedicine.inputRequireData(rowData.get("Tên sản phẩm"),rowData.get("Đường dùng"),  Integer.parseInt(rowData.get("Giá bán")),rowData.get("Đơn vị cơ bản"));
             addNewMedicine.clickButtonLuu();
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             WebElement toast = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(addNewProductPageUI.getMessageSuccessful())));

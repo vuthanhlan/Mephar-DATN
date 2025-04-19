@@ -30,25 +30,40 @@ public class AddNewMedicineAction {
         navigatePageUI.getLinkAddNewMedicine().click();
 
     }
+
+    public void inputRequireData(String Name, String RouteOfUse, Integer sellingPrice, String unit){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        addNewProductPageUI.getTextMedicineName().click();
+        WebElement MedicineName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(addNewProductPageUI.getSubMedicineName(Name))));
+        MedicineName.click();
+
+        addNewProductPageUI.getRouteOfUse().click();
+        WebElement RoutOfUse = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(addNewProductPageUI.getSubRouteOfUse(RouteOfUse))));
+        RoutOfUse.click();
+        addNewProductPageUI.getTextSellingPrice().sendKeys(String.valueOf(sellingPrice));
+        addNewProductPageUI.getTextBasicUnit().sendKeys(unit);
+
+    }
+
     public void inputData(String code, String Barcode, String Name, String SummaryName,String group,String RouteOfUse,String location, String ImportPrice, String sellingPrice, String weight, String Unit) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         addNewProductPageUI.getTextCode().sendKeys(code);
         addNewProductPageUI.getTextBarcode().sendKeys(Barcode);
         addNewProductPageUI.getTextMedicineName().click();
-        WebElement MedicineName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+Name+"')]/parent::div")));
+        WebElement MedicineName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(addNewProductPageUI.getSubMedicineName(Name))));
         MedicineName.click();
 
         addNewProductPageUI.getTextSummaryName().sendKeys(SummaryName);
         addNewProductPageUI.getTextGroup().click();
-        WebElement SubGroup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+group+"')]")));
+        WebElement SubGroup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(addNewProductPageUI.getSubGroup(group))));
         SubGroup.click();
 
         addNewProductPageUI.getRouteOfUse().click();
-        WebElement RoutOfUse = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+RouteOfUse+"')]")));
+        WebElement RoutOfUse = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(addNewProductPageUI.getSubRouteOfUse(RouteOfUse))));
         RoutOfUse.click();
 
         addNewProductPageUI.getTextLocation().click();
-        WebElement SubLocation = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+location+"')]")));
+        WebElement SubLocation = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(addNewProductPageUI.getSubLocation(location))));
         SubLocation.click();
         addNewProductPageUI.getTextImportPrice().sendKeys(String.valueOf(ImportPrice));
         addNewProductPageUI.getTextSellingPrice().sendKeys(String.valueOf(sellingPrice));

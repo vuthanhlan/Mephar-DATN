@@ -64,6 +64,7 @@ public class AddNewMerchandiseAction {
     }
 
 
+
     public void inputData(String code, String Barcode, String Name, String SummaryName,String group,String location, String ImportPrice, String sellingPrice, String weight, String Packing,String brand,String country, String inventor, String Unit) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         addNewProductPageUI.getTextCode().sendKeys(code);
