@@ -14,4 +14,6 @@ public class NavigatePageUI {
     public WebElement getButtonAddProduct(){return driver.findElement(By.xpath("//span[contains(text(),'Thêm mới')]/ancestor::button"));}
     public WebElement getLinkAddNewMedicine(){return driver.findElement(By.xpath("//span[contains(text(),'Thêm mới thuốc')]/parent::li"));}
     public WebElement getLinkAddNewMerchandise(){return driver.findElement(By.xpath("//span[contains(text(),'Thêm mới hàng hóa')]/parent::li"));}
+    public static String getMarketButton() {return "//span[contains(text(),'Chợ')]";}
+    public WebElement getMarketLink() {return driver.findElement(By.xpath("//a[contains(text(),'Chợ')]"));}
 }

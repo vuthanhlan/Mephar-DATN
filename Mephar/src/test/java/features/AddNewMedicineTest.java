@@ -60,6 +60,7 @@ public class AddNewMedicineTest {
             Assert.assertEquals(message,"Thêm mới thành công!");
         }
     }
+
     @Test
     public void testAddNewMedicineSuccessfulWithAllFields() throws InterruptedException, AWTException {
         List<Map<String, String>> excelData1 = ExcelUntils.readExcelData(excelFilePath, "Danh sách sản phẩm");
